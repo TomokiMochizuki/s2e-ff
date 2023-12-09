@@ -23,13 +23,13 @@ void RelativeOrbitAnalyzer::MainRoutine(int count) {
 
   baseline_angle1_in_img_rad_ = asin(d_chief_to_target1_img_[2]);
 
-  // Target-2
-  libra::Vector<3> r_chief_to_target2_i_m = rel_info_.GetRelativePosition_i_m(2, 0);
-  d_norm_chief_to_target2_ = r_chief_to_target2_i_m.CalcNorm();
-  libra::Vector<3> d_chief_to_target2_i = r_chief_to_target2_i_m.CalcNormalizedVector();
-  d_chief_to_target2_img_ = dcm_eci_to_img_ * d_chief_to_target2_i;
+  // // Target-2
+  // libra::Vector<3> r_chief_to_target2_i_m = rel_info_.GetRelativePosition_i_m(2, 0);
+  // d_norm_chief_to_target2_ = r_chief_to_target2_i_m.CalcNorm();
+  // libra::Vector<3> d_chief_to_target2_i = r_chief_to_target2_i_m.CalcNormalizedVector();
+  // d_chief_to_target2_img_ = dcm_eci_to_img_ * d_chief_to_target2_i;
 
-  baseline_angle2_in_img_rad_ = asin(d_chief_to_target2_img_[2]);
+  // baseline_angle2_in_img_rad_ = asin(d_chief_to_target2_img_[2]);
 }
 
 std::string RelativeOrbitAnalyzer::GetLogHeader() const {
@@ -40,9 +40,9 @@ std::string RelativeOrbitAnalyzer::GetLogHeader() const {
   str_tmp += WriteScalar(head + "intersat_length_target1", "m");
   str_tmp += WriteScalar(head + "baseline_angle_in_img_target1", "rad");
 
-  str_tmp += WriteVector(head + "baseline_direction_target2", "img", "-", 3);
-  str_tmp += WriteScalar(head + "intersat_length_target2", "m");
-  str_tmp += WriteScalar(head + "baseline_angle_in_img_target2", "rad");
+  // str_tmp += WriteVector(head + "baseline_direction_target2", "img", "-", 3);
+  // str_tmp += WriteScalar(head + "intersat_length_target2", "m");
+  // str_tmp += WriteScalar(head + "baseline_angle_in_img_target2", "rad");
 
   return str_tmp;
 }
@@ -54,9 +54,9 @@ std::string RelativeOrbitAnalyzer::GetLogValue() const {
   str_tmp += WriteScalar(d_norm_chief_to_target1_);
   str_tmp += WriteScalar(baseline_angle1_in_img_rad_);
 
-  str_tmp += WriteVector(d_chief_to_target2_img_);
-  str_tmp += WriteScalar(d_norm_chief_to_target2_);
-  str_tmp += WriteScalar(baseline_angle2_in_img_rad_);
+  // str_tmp += WriteVector(d_chief_to_target2_img_);
+  // str_tmp += WriteScalar(d_norm_chief_to_target2_);
+  // str_tmp += WriteScalar(baseline_angle2_in_img_rad_);
 
   return str_tmp;
 }
