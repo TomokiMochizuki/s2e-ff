@@ -12,6 +12,8 @@
 
 #include "../../simulation/case/ff_inter_spacecraft_communication.hpp"
 #include "../aocs/laser_distance_meter.hpp"
+#include "../aocs/relative_attitude_sensor.hpp"
+#include "../aocs/relative_position_sensor.hpp"
 
 const size_t kLaserDistanceMetersNumber = 3;
 const size_t kQpdPositioningSensorsNumber = 2;
@@ -27,6 +29,7 @@ class RelativePositionAttitudeObserver : public Component, public ILoggable {
    * @brief Constructor
    */
   RelativePositionAttitudeObserver(const int prescaler, ClockGenerator* clock_gen, std::vector<LaserDistanceMeter*>& laser_distance_meters,
+                                   RelativePositionSensor& relative_position_sensor, RelativeAttitudeSensor& relative_attitude_sensor,
                                    FfInterSpacecraftCommunication& inter_spacecraft_communication);
   /**
    * @fn ~RelativePositionAttitudeObserver
@@ -58,6 +61,8 @@ class RelativePositionAttitudeObserver : public Component, public ILoggable {
 
  protected:
   std::vector<LaserDistanceMeter*> laser_distance_meters_;
+  RelativePositionSensor& relative_position_sensor_;
+  RelativeAttitudeSensor& relative_attitude_sensor_;
   FfInterSpacecraftCommunication& inter_spacecraft_communication_;
 
   libra::Vector<3> observed_relative_position_m_{0.0};

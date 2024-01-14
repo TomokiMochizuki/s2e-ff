@@ -54,6 +54,7 @@ set(SOURCE_FILES
   src/components/aocs/laser_distance_meter.cpp
   src/components/aocs/laser_emitter.cpp
   src/components/aocs/qpd_positioning_sensor.cpp
+  src/components/controller/relative_position_attitude_controller.cpp
   src/components/ideal/relative_attitude_controller.cpp
   src/components/ideal/initialize_relative_attitude_controller.cpp
   src/components/observer/relative_position_attitude_observer.cpp

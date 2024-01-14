@@ -23,6 +23,7 @@
 #include "../../components/aocs/relative_distance_sensor.hpp"
 #include "../../components/aocs/relative_position_sensor.hpp"
 #include "../../components/aocs/relative_velocity_sensor.hpp"
+#include "../../components/controller/relative_position_attitude_controller.hpp"
 #include "../../components/ideal/initialize_relative_attitude_controller.hpp"
 #include "../../components/observer/relative_position_attitude_observer.hpp"
 
@@ -81,6 +82,8 @@ class FfComponents : public InstalledComponents {
   // RelativeAttitudeController* relative_attitude_controller_;  //!< Example of attitude controller
   // Observers
   RelativePositionAttitudeObserver* relative_position_attitude_observer_;
+  // Controllers
+  RelativePositionAttitudeController* relative_position_attitude_controller_;
 
   // References
   const Dynamics* dynamics_;               //!< Dynamics information of the spacecraft
