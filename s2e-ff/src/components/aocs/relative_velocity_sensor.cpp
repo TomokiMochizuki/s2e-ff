@@ -55,8 +55,8 @@ void RelativeVelocitySensor::MainRoutine(int count) {
 std::string RelativeVelocitySensor::GetLogHeader() const {
   std::string str_tmp = "";
   std::string head = "RelativeVelocitySensor_";
-  str_tmp += WriteVector(head + "velocity", "i", "m", 3);
-  str_tmp += WriteVector(head + "velocity", "rtn", "m", 3);
+  str_tmp += WriteVector(head + "velocity", "i", "m/s", 3);
+  str_tmp += WriteVector(head + "velocity", "rtn", "m/s", 3);
 
   return str_tmp;
 }

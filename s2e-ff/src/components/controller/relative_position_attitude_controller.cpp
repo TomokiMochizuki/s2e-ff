@@ -12,10 +12,7 @@ RelativePositionAttitudeController::RelativePositionAttitudeController(const int
   Initialize();
 }
 
-void RelativePositionAttitudeController::MainRoutine(int count) {
-  if (count < 20) return;
-  EstimateStates();
-}
+void RelativePositionAttitudeController::MainRoutine(int count) { EstimateStates(count); }
 
 std::string RelativePositionAttitudeController::GetLogHeader() const {
   std::string str_tmp = "";
@@ -39,16 +36,18 @@ void RelativePositionAttitudeController::Initialize() {
   feedback_gain_[0] = 0.1;
   feedback_gain_[1] = 0.5;
 
-  target_relatative_position_m_[0] = 9.0;
+  target_relatative_position_m_[0] = 9.07;
 }
 
-void RelativePositionAttitudeController::EstimateStates() {
-  libra::Vector<3> observed_relative_position_m = relative_position_attitude_observer_->GetObservedRelativePosition_m();
-  libra::Vector<3> calculated_acceleration_m_s2 =
-      -feedback_gain_[0] * estimated_state_position_m_ - feedback_gain_[1] * estimated_state_velocity_m_s_;
+void RelativePositionAttitudeController::EstimateStates(int count) {
+  libra::Vector<3> observed_relative_position_m = -relative_position_attitude_observer_->GetObservedRelativePosition_m();
+  libra::Vector<3> calculated_acceleration_m_s2{0.0};
+  if (count > 500) {
+    calculated_acceleration_m_s2 = -feedback_gain_[0] * estimated_state_position_m_ - feedback_gain_[1] * estimated_state_velocity_m_s_;
 
-  libra::Vector<3> calculated_force_b_N = mass_kg_ * calculated_acceleration_m_s2;
-  force_generator_->SetForce_b_N(calculated_force_b_N);
+    libra::Vector<3> calculated_force_b_N = mass_kg_ * calculated_acceleration_m_s2;
+    force_generator_->SetForce_b_N(calculated_force_b_N);
+  }
 
   estimated_state_position_m_ += component_update_sec_ * estimated_state_position_dot_m_s_;
   estimated_state_velocity_m_s_ += component_update_sec_ * estimated_state_velocity_dot_m_s2_;

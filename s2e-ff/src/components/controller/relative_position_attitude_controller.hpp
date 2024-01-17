@@ -68,7 +68,7 @@ class RelativePositionAttitudeController : public Component, public ILoggable {
   libra::Vector<2> feedback_gain_{0.0};
   // Funbstions
   void Initialize();
-  void EstimateStates();
+  void EstimateStates(int count);
 };
 
 #endif  // S2E_COMPONENTS_RELATIVE_POSITION_ATTITUDE_CONTROLLER_HPP_
