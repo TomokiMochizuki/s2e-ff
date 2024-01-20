@@ -18,7 +18,7 @@
 #include <components/real/cdh/on_board_computer.hpp>
 
 #include "../../components/aocs/laser_distance_meter.hpp"
-#include "../../components/aocs/qpd_positioning_sensor.hpp"
+#include "../../components/aocs/laser_emitter.hpp"
 #include "../../components/aocs/relative_attitude_sensor.hpp"
 #include "../../components/aocs/relative_distance_sensor.hpp"
 #include "../../components/aocs/relative_position_sensor.hpp"
@@ -63,7 +63,6 @@ class FfComponents : public InstalledComponents {
   void LogSetup(Logger& logger);
 
   inline std::vector<LaserDistanceMeter*> GetLaserDistanceMeters() const { return laser_distance_meters_; }
-  inline std::vector<QpdPositioningSensor*> GetQpdPositioningSensors() const { return qpd_positioning_sensors_; }
 
  private:
   // Components
@@ -75,7 +74,7 @@ class FfComponents : public InstalledComponents {
   RelativeAttitudeSensor* relative_attitude_sensor_;  //!< Example of Relative attitude sensor
   RelativeVelocitySensor* relative_velocity_sensor_;  //!< Example of Relative velocity sensor
   std::vector<LaserDistanceMeter*> laser_distance_meters_;
-  std::vector<QpdPositioningSensor*> qpd_positioning_sensors_;
+  std::vector<LaserEmitter*> laser_emitters_;
   // Actuators
   ForceGenerator* force_generator_;                           //!< Example of force generator
   TorqueGenerator* torque_generator_;                         //!< Example of torque generator
