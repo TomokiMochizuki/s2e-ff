@@ -69,7 +69,7 @@ FfComponents::FfComponents(const Dynamics* dynamics, const Structure* structure,
                                                                               *relative_attitude_sensor_, inter_spacecraft_communication_);
 
   relative_position_attitude_controller_ =
-      new RelativePositionAttitudeController(1, clock_gen, force_generator_, relative_position_attitude_observer_);
+      new RelativePositionAttitudeController(1, clock_gen, force_generator_, torque_generator_, relative_position_attitude_observer_);
 
   // Debug for actuator output
   libra::Vector<3> force_N;
