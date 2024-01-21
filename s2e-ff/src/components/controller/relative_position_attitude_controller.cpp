@@ -47,7 +47,7 @@ void RelativePositionAttitudeController::Initialize() {
   inertia_tensor_kgm2_[1][1] = 0.1;
   inertia_tensor_kgm2_[2][2] = 0.1;
 
-  target_relatative_position_m_[0] = 9.07;
+  target_relatative_position_m_[0] = 9.0;
 }
 
 void RelativePositionAttitudeController::EstimateStates(int count) {
@@ -56,16 +56,16 @@ void RelativePositionAttitudeController::EstimateStates(int count) {
   libra::Vector<3> calculated_acceleration_m_s2{0.0};
   libra::Vector<3> calculated_acceleration_rad_s2{0.0};
   if (count > 500) {
-    // calculated_acceleration_m_s2 = -feedback_gain_[0] * estimated_state_position_m_ - feedback_gain_[1] * estimated_state_velocity_m_s_;
+    calculated_acceleration_m_s2 = -feedback_gain_[0] * estimated_state_position_m_ - feedback_gain_[1] * estimated_state_velocity_m_s_;
 
-    // libra::Vector<3> calculated_force_b_N = mass_kg_ * calculated_acceleration_m_s2;
-    // force_generator_->SetForce_b_N(calculated_force_b_N);
+    libra::Vector<3> calculated_force_b_N = mass_kg_ * calculated_acceleration_m_s2;
+    force_generator_->SetForce_b_N(calculated_force_b_N);
 
-    calculated_acceleration_rad_s2 =
-        -feedback_gain_[0] * estimated_state_euler_angle_rad_ - feedback_gain_[1] * estimated_state_angular_velocity_rad_s_;
+    // calculated_acceleration_rad_s2 =
+    //     -feedback_gain_[0] * estimated_state_euler_angle_rad_ - feedback_gain_[1] * estimated_state_angular_velocity_rad_s_;
 
-    libra::Vector<3> calculated_torque_b_Nm = inertia_tensor_kgm2_ * calculated_acceleration_rad_s2;
-    torque_generator_->SetTorque_b_Nm(calculated_torque_b_Nm);
+    // libra::Vector<3> calculated_torque_b_Nm = inertia_tensor_kgm2_ * calculated_acceleration_rad_s2;
+    // torque_generator_->SetTorque_b_Nm(calculated_torque_b_Nm);
   }
 
   estimated_state_position_m_ += component_update_sec_ * estimated_state_position_dot_m_s_;
